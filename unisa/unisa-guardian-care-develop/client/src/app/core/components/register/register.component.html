@@ -1,0 +1,33 @@
+<div class="gc-layout-content">
+    <div class="gc-layout-content-inner">
+
+        <!-- Heading -->
+        <h1 class="gc-layout-heading">Register</h1>
+
+        <!-- Registration form -->
+        <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+
+            <mat-card class="register" [formGroup]="registerForm">
+
+                <!-- Username -->
+                <mat-form-field>
+                    <mat-label>Username</mat-label>
+                    <input matInput placeholder="Username" formControlName="username">
+                    <mat-error *ngIf="registerForm.get('username')?.invalid">{{ getErrorMessage('username') }}
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- Password -->
+                <mat-form-field>
+                    <mat-label>Password</mat-label>
+                    <input matInput placeholder="Password" formControlName="password">
+                    <mat-error *ngIf="registerForm.get('password')?.invalid">{{ getErrorMessage('password') }}
+                    </mat-error>
+                </mat-form-field>
+
+                <button mat-raised-button color="accent" class="register__button" type="submit">Create
+                    account</button>
+            </mat-card>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+<!-- Top navbar -->
+<mat-toolbar color="primary" class="toolbar">
+
+  <div class="toolbar__wrapper gc-layout-content">
+
+    <!-- Left -->
+    <div class="toolbar__left">
+      <!-- Home -->
+      <a mat-button routerLink="home" class="toolbar__link">
+        <img src="assets/images/logo-light.png" class="toolbar__logo">
+      </a>
+
+      <!-- Plans -->
+      <a *ifAuthenticated mat-button routerLink="plans" class="toolbar__link">
+        <span>Plans</span>
+      </a>
+    </div>
+
+    <!-- Right -->
+    <div class="toolbar__right">
+      <!-- User is logged in -->
+      <ng-container *ngIf="(singleSignOnService.isLoggedIn$ | async) || authService.isAuthenticated; else loggedout">
+        <!-- Debug -->
+        <a mat-button routerLink="debug" class="toolbar__link">
+          <span>Debug</span>
+        </a>
+
+        <!-- Admin -->
+        <a *ngIf="singleSignOnService.isAdmin" mat-button routerLink="admin" class="toolbar__link">
+          <span>Admin</span>
+        </a>
+
+        <!-- Account -->
+        <button mat-flat-button color="accent" [matMenuTriggerFor]="menu" class="toolbar__button">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="onSettings()" *ngIf="featureFlagService.isOn(FeatureFlag.FEATURE_SINGLE_SIGN_ON)">
+            <mat-icon>settings</mat-icon><span>Account Settings</span>
+          </button>
+          <button mat-menu-item (click)="onLogout()">
+            <mat-icon>logout</mat-icon><span>Sign Out</span>
+          </button>
+        </mat-menu>
+      </ng-container>
+
+      <!-- User is NOT logged in -->
+      <ng-template #loggedout>
+        <!-- Login -->
+        <button mat-raised-button class="toolbar__button" (click)="onLogin()">Log In</button>
+        <!-- Login -->
+        <button mat-raised-button color="accent" class="toolbar__button" (click)="onSignUp()">Sign Up</button>
+      </ng-template>
+    </div>
+
+  </div>
+
+</mat-toolbar>
+
+<div id="content">
+  <router-outlet></router-outlet>
+</div>

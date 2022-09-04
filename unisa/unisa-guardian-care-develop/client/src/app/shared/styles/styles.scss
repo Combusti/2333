@@ -1,0 +1,13 @@
+@use 'variables';
+
+h1, h2, h3 {
+    font-weight: variables.$gc-font-weight-light !important;
+}
+
+h1 {
+    font-size: variables.$gc-font-size-xlarge !important;
+}
+
+table {
+    margin-bottom: variables.$gc-spacing-medium;
+}

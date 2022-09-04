@@ -1,0 +1,29 @@
+// General
+$gc-content-max-width: 1200px;
+$gc-navbar-height: 64px;
+
+// Spacing
+$gc-spacing-xxsmall: 2px;
+$gc-spacing-xsmall: 4px;
+$gc-spacing-small: 8px;
+$gc-spacing-medium: 16px;
+$gc-spacing-large: 32px;
+$gc-spacing-xlarge: 48px;
+$gc-spacing-xxlarge: 64px;
+
+.gc-layout-heading {
+    text-align: center;
+    margin: $gc-spacing-xxlarge 0;
+}
+
+.gc-layout-content {
+    width: 100%;
+    max-width: $gc-content-max-width;
+    margin: auto;
+}
+
+.gc-layout-content-inner {
+    width: -webkit-fill-available;
+    padding: 0 32px;
+    padding: 0 $gc-spacing-large;
+}

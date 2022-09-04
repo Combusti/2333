@@ -1,0 +1,60 @@
+@use '@angular/material' as mat;
+@use 'variables';
+
+$banner-height: 20px;
+
+.gc-layout-content-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: variables.$gc-spacing-medium;
+}
+
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(200px, 1fr));
+    gap: variables.$gc-spacing-medium;
+}
+
+.product {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: variables.$gc-spacing-medium;
+    border: 1px solid variables.$gc-colours-neutral-light;
+    border-radius: variables.$gc-spacing-xsmall;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    padding: 0 $banner-height $banner-height;
+
+    &__best-value {
+        width: 100%;
+        height: $banner-height;
+        padding: 0px $banner-height;
+
+        &--enabled {
+            color: variables.$dark-primary-text;
+            text-align: center;
+            background-color: mat.get-color-from-palette(variables.$colour-palette-accent, 300);
+            font-weight: variables.$gc-font-weight-semibold;
+            font-size: variables.$gc-font-size-small;
+        }
+    }
+
+    &__amount {
+        font-size: variables.$gc-font-size-medium;
+        font-weight: variables.$gc-font-weight-semibold;
+    }
+
+    &__per-user {
+        font-size: variables.$gc-font-size-small;
+        font-weight: variables.$gc-font-weight-light;
+    }
+
+    &__description {
+        text-align: center;
+    }
+
+    &__subscribe {
+        margin-top: auto;
+    }
+}

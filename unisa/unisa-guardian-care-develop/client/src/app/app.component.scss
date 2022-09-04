@@ -1,0 +1,36 @@
+@use "variables";
+
+.toolbar {
+  justify-content: center;
+
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__left,
+  &__right {
+    display: flex;
+    gap: variables.$gc-spacing-medium;
+  }
+
+  &__logo {
+    height: 44px;
+  }
+
+  &__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+#content {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - #{variables.$gc-navbar-height});
+  margin: auto;
+  overflow-wrap: anywhere;
+  overflow: auto;
+}

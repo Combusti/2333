@@ -1,0 +1,60 @@
+@use '@angular/material' as mat;
+@use 'variables';
+
+:host {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    flex: 0 0 300px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.call-to-action {
+    width: 100%;
+    display: flex;
+    flex: 0 0 600px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: variables.$light-primary-text;
+    background-color: mat.get-color-from-palette(variables.$colour-palette-primary, 400);
+
+    &__wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    &__heading {
+        word-spacing:9999px;
+        white-space: pre-line;
+        font-size: 80px !important;
+        line-height: normal;
+    }
+
+    &__action {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: variables.$gc-spacing-xlarge;
+    }
+
+    &__label {
+        font-size: variables.$gc-font-size-medium;
+        font-weight: variables.$gc-font-weight-light;
+        line-height: normal;
+        text-align: center;
+    }
+
+    &__button {
+        margin: 0 auto;
+    }
+}

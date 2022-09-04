@@ -1,0 +1,31 @@
+<div class="gc-layout-content">
+    <div class="gc-layout-content-inner">
+
+        <!-- Heading -->
+        <h1 class="gc-layout-heading">Plans</h1>
+
+        <!-- Product list -->
+        <section class="product-list">
+            <div *ngFor="let product of (productService.productList$ | async)" class="product">
+                <!-- Best value banner -->
+                <div class="product__best-value" [class.product__best-value--enabled]="product.isBestValue">
+                    <span *ngIf="product.isBestValue">{{ "Best Value" | uppercase }}</span>
+                </div>
+
+                <!-- Name -->
+                <h2>{{ product.name }}</h2>
+
+                <!-- Cost -->
+                <span class="product__amount">{{ (product.amount / 100 | currency) }} / month</span>
+                <span class="product__per-user">per user</span>
+
+                <!-- Description -->
+                <span class="product__description">{{ product.description }}</span>
+
+                <!-- Subscribe -->
+                <button mat-raised-button color="accent" class="product__subscribe" (click)="onSubscribe(product.id)">Choose {{ product.name }}</button>
+            </div>
+        </section>
+
+    </div>
+</div>

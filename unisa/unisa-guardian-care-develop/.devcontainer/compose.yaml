@@ -1,0 +1,98 @@
+version: "3.2"
+
+networks:
+    guardian-network:
+        driver: bridge
+
+services:
+    # Development container
+    develop:
+        container_name: guardian-care-develop
+        build:
+            context: ..
+            dockerfile: ./.devcontainer/Dockerfile
+        depends_on:
+            - keycloak
+            - mssql
+        command: /bin/sh -c "while sleep 1000; do :; done"
+        volumes:
+            # Forwards the local Docker socket to the container.
+            - /var/run/docker.sock:/var/run/docker-host.sock 
+            # Mounts the project folder to '/usr/src/app/'. The target path inside the container
+            # should match what your application expects. In this case, the compose file is
+            # in a sub-folder, so you will mount '..'. You would then reference this path as the
+            # 'workspaceFolder' in '.devcontainer/devcontainer.json' so VS Code starts here.
+            - ../:/usr/src/app:cached
+        tty: true
+        networks:
+            - guardian-network
+        links:
+            - keycloak
+
+    # Keycloak (Identity Provider)
+    keycloak:
+        container_name: guardian-care-keycloak
+        image: quay.io/keycloak/keycloak:latest
+        depends_on:
+            - mssql
+            - db-setup-keycloak
+            - db-setup-xa
+        ports:
+            - "8080:8080"
+        environment:
+            - KEYCLOAK_ADMIN=admin
+            - KEYCLOAK_ADMIN_PASSWORD=admin
+            - KC_DB=mssql
+            - KC_DB_URL=jdbc:sqlserver://mssql:1433;databaseName=Keycloak
+            - KC_DB_USERNAME=sa
+            - KC_DB_PASSWORD=Password!23
+        networks:
+            - guardian-network
+        command: start-dev
+
+    # Set up MSSQL database
+    mssql:
+        container_name: guardian-care-mssql
+        build:
+            context: ..
+            dockerfile: ./database/Dockerfile
+            args:
+                SA_PASSWORD: Password!23
+                DB_GUARDIAN: GuardianCare
+        ports:
+            - "135:135"
+            - "1433:1433"
+            - "51000:51000"
+        environment:
+            - MSSQL_PID=Developer
+            - SA_PASSWORD=Password!23
+            - MSSQL_RPC_PORT=135
+            - MSSQL_DTC_TCP_PORT=51000
+            - ACCEPT_EULA=Y
+        networks:
+            - guardian-network
+        hostname: mssql
+
+    # Keycloak DB setup
+    db-setup-keycloak:
+        image: mcr.microsoft.com/mssql-tools
+        container_name: guardian-care-db-setup-keycloak
+        depends_on:
+            - mssql
+        networks:
+            - guardian-network
+        volumes:
+            - ../:/mount
+        command: /mount/scripts/wait-for-it.sh mssql:1433 -- /opt/mssql-tools/bin/sqlcmd -S mssql -U sa -P "Password!23" -Q "create database Keycloak"
+
+    # Install support for extended architecture
+    db-setup-xa:
+        image: mcr.microsoft.com/mssql-tools
+        container_name: guardian-care-db-setup-xa
+        depends_on:
+            - mssql
+        networks:
+            - guardian-network
+        volumes:
+            - ../:/mount
+        command: /mount/scripts/wait-for-it.sh mssql:1433 -- /opt/mssql-tools/bin/sqlcmd -S mssql -U sa -P "Password!23" -Q "EXEC sp_sqljdbc_xa_install"

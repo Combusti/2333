@@ -1,0 +1,47 @@
+{
+  "format": 1,
+  "restore": {
+    "c:\\Users\\jakob\\Offline\\Development\\UniSA\\unisa\\unisa-guardian-care\\database\\database.sqlproj": {}
+  },
+  "projects": {
+    "c:\\Users\\jakob\\Offline\\Development\\UniSA\\unisa\\unisa-guardian-care\\database\\database.sqlproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "c:\\Users\\jakob\\Offline\\Development\\UniSA\\unisa\\unisa-guardian-care\\database\\database.sqlproj",
+        "projectName": "database",
+        "projectPath": "c:\\Users\\jakob\\Offline\\Development\\UniSA\\unisa\\unisa-guardian-care\\database\\database.sqlproj",
+        "packagesPath": "C:\\Users\\jakob\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\jakob\\Offline\\Development\\UniSA\\unisa\\unisa-guardian-care\\database\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "configFilePaths": [
+          "C:\\Users\\jakob\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net46"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net46": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net46": {
+          "dependencies": {
+            "Microsoft.NETFramework.ReferenceAssemblies": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.0, )"
+            }
+          }
+        }
+      }
+    }
+  }
+}

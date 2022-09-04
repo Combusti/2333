@@ -1,0 +1,32 @@
+<header class="header">
+    <h2 class="header__heading-1">Welcome to</h2>
+    <h1 class="header__heading-2">Guardian Care</h1>
+
+</header>
+
+<section class="call-to-action">
+    <div class="gc-layout-content">
+        <div class="gc-layout-content-inner call-to-action__wrapper">
+            <!-- Heading -->
+            <h1 class="call-to-action__heading">Healthspan is everything.</h1>
+
+            <!-- Call to action -->
+            <div class="call-to-action__action">
+                <span class="call-to-action__label">Ready to live happier, healthier and longer?</span>
+
+                <!-- conditionally set button based on auth status -->
+                <ng-container *ngIf="(singleSignOnService.isLoggedIn$ | async) || authService.isAuthenticated; else loggedout">
+                    <!-- Plans button -->
+                    <a mat-flat-button color="accent" routerLink="../plans" class="call-to-action__button">
+                        <span>See Plans</span>
+                    </a>
+                </ng-container>
+                <ng-template #loggedout>
+                    <!-- Sign up button -->
+                    <button mat-raised-button color="accent" class="call-to-action__button" (click)="onSignUp()">Sign Up</button>
+                </ng-template>
+
+            </div>
+        </div>
+    </div>
+</section>

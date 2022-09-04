@@ -1,0 +1,69 @@
+<!-- Heading -->
+<h1 class="gc-layout-heading">Hello, {{ userProfile?.firstName }}</h1>
+
+<!-- User Profile -->
+<div>
+    <h2>Here's some things we know about you...</h2>
+    <table mat-table [dataSource]="userProfileKeyValues" class="mat-elevation-z8">
+        <!-- Key Column -->
+        <ng-container matColumnDef="key">
+            <th mat-header-cell *matHeaderCellDef>Key</th>
+            <td mat-cell *matCellDef="let element">{{ element.key }}</td>
+        </ng-container>
+
+        <!-- Value Column -->
+        <ng-container matColumnDef="value">
+            <th mat-header-cell *matHeaderCellDef>Value</th>
+            <td mat-cell *matCellDef="let element">{{ element.value }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+</div>
+
+<!-- Token -->
+<div>
+    <h2 class="subheading">And here's your token...</h2>
+    <p>{{ token }}</p>
+</div>
+
+<div>
+    <h2>Token Header</h2>
+    <table mat-table [dataSource]="tokenHeaderKeyValues" class="mat-elevation-z8">
+        <!-- Key Column -->
+        <ng-container matColumnDef="key">
+            <th mat-header-cell *matHeaderCellDef>Key</th>
+            <td mat-cell *matCellDef="let element">{{ element.key }}</td>
+        </ng-container>
+
+        <!-- Value Column -->
+        <ng-container matColumnDef="value">
+            <th mat-header-cell *matHeaderCellDef>Value</th>
+            <td mat-cell *matCellDef="let element">{{ element.value }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+</div>
+
+<div>
+    <h2>Token Payload</h2>
+    <table mat-table [dataSource]="tokenPayloadKeyValues" class="mat-elevation-z8">
+        <!-- Key Column -->
+        <ng-container matColumnDef="key">
+            <th mat-header-cell *matHeaderCellDef>Key</th>
+            <td mat-cell *matCellDef="let element">{{ element.key }}</td>
+        </ng-container>
+
+        <!-- Value Column -->
+        <ng-container matColumnDef="value">
+            <th mat-header-cell *matHeaderCellDef>Value</th>
+            <td mat-cell *matCellDef="let element">{{ element.value }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+</div>

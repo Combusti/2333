@@ -1,0 +1,12 @@
+@use "variables";
+
+.gc-layout-content-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: variables.$gc-spacing-large;
+
+  > * {
+    width: 100%;
+  }
+}

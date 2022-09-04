@@ -1,0 +1,9 @@
+<div class="gc-layout-content">
+    <div class="gc-layout-content-inner">
+        <app-debug-sso *ngIf="featureFlagService.isOn(FeatureFlag.FEATURE_SINGLE_SIGN_ON); else legacy"></app-debug-sso>
+        <ng-template #legacy>
+            <app-debug-legacy></app-debug-legacy>
+        </ng-template>
+        
+    </div>
+</div>

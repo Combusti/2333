@@ -1,0 +1,38 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.238.0/containers/docker-from-docker-compose
+{
+	"name": "Guardian Care",
+	"dockerComposeFile": "./compose.yaml",
+	"service": "develop",
+	"workspaceFolder": "/usr/src/app/",
+	// "shutdownAction": "stopCompose",
+
+	// Use this environment variable if you need to bind mount your local source code into a new container.
+	"remoteEnv": {
+		"LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+	},
+
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {		
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ms-azuretools.vscode-docker",
+				"ms-vscode.vscode-typescript-tslint-plugin", // TSLint
+				"esbenp.prettier-vscode", // Prettier
+				"angular.ng-template", // Angular Language Service
+				"msjsdiag.debugger-for-chrome", // Chrome Debugger
+				"vscode-icons-team.vscode-icons" // VS Code Icons
+			]
+		}
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [5000, 8080],
+
+	"features": {
+		"node": "18",
+		"python": "3.10"
+	}
+}

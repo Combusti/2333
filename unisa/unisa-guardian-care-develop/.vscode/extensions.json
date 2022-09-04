@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "ms-vscode-remote.remote-containers",
+        "angular.ng-template",
+        "streetsidesoftware.code-spell-checker",
+        "davidanson.vscode-markdownlint",
+        "esbenp.prettier-vscode",
+        "ue.alphabetical-sorter"
+    ]
+}

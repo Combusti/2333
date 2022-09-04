@@ -1,0 +1,84 @@
+version: "3.2"
+
+services:
+    # Client
+    client:
+        container_name: guardian-care-client
+        build:
+            context: ./client
+            dockerfile: Dockerfile
+        ports:
+            - "4200:4200"
+        volumes:
+            - ./client:/usr/src/app/client
+            - /usr/src/app/client/node_modules
+    
+    # API
+    api:
+        container_name: guardian-care-api
+        build:
+            context: ./api
+            dockerfile: Dockerfile
+        depends_on:
+            - keycloak
+        ports:
+            - "5000:5000"
+        volumes:
+            - ./api:/usr/src/app/api
+
+    # Development container
+    develop:
+        container_name: guardian-care-develop
+        build:
+            context: .
+            dockerfile: Dockerfile
+        depends_on:
+            - keycloak
+        ports:
+            - "4200:4200"
+            - "5000:5000"
+        volumes:
+            - ./:/usr/src/app/        
+
+    # Keycloak (Identity Provider)
+    keycloak:
+        container_name: guardian-care-keycloak
+        image: quay.io/keycloak/keycloak:latest
+        depends_on:
+            - mssql
+            - mssqlscripts
+        ports:
+            - "8080:8080"
+        environment:
+            - KEYCLOAK_ADMIN=admin
+            - KEYCLOAK_ADMIN_PASSWORD=admin
+            - DB_VENDOR=mssql
+            - DB_USER=sa
+            - DB_PASSWORD=Password!23
+            - DB_ADDR=mssql
+            - DB_DATABASE=Keycloak
+        command: start-dev
+    # SQL Server (to store Keycloak DB)
+    mssql:
+        image: mcr.microsoft.com/mssql/server
+        container_name: guardian-care-mssql
+        ports:
+            - "1433:1433"
+        environment:
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=Password!23
+            - MSSQL_PID=Developer
+    # Keycloak DB setup
+    mssqlscripts:
+        image: mcr.microsoft.com/mssql-tools
+        container_name: guardian-care-mssql-tools
+        depends_on:
+            - mssql
+        command: /bin/bash -c 'until /opt/mssql-tools/bin/sqlcmd -S mssql -U sa -P "Password!23" -Q "create database Keycloak"; do sleep 5; done'
+    # Keycloak DB setup
+    mssqlscripts:
+        image: markhobson/sqlpackage
+        container_name: guardian-care-sqlpackage
+        depends_on:
+            - mssql
+        command: /action:Import /TargetServerName:. /TargetDatabaseName:GuardianCare /TargetUser:sa /tp:"Password!23"  /SourceFile:/database/Database.bacpac

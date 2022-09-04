@@ -1,0 +1,32 @@
+<div class="gc-layout-content">
+    <div class="gc-layout-content-inner">
+
+        <!-- Heading -->
+        <h1 class="gc-layout-heading">Login</h1>
+
+        <!-- Login form -->
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+
+            <mat-card class="login" [formGroup]="loginForm">
+
+                <!-- Username -->
+                <mat-form-field>
+                    <mat-label>Username</mat-label>
+                    <input matInput placeholder="Username" formControlName="username">
+                    <mat-error *ngIf="loginForm.get('username')?.invalid">{{ getErrorMessage('username') }}
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- Password -->
+                <mat-form-field>
+                    <mat-label>Password</mat-label>
+                    <input matInput placeholder="Password" formControlName="password">
+                    <mat-error *ngIf="loginForm.get('password')?.invalid">{{ getErrorMessage('password') }}
+                    </mat-error>
+                </mat-form-field>
+
+                <button mat-raised-button color="accent" class="login__button" type="submit">Log In</button>
+            </mat-card>
+        </form>
+    </div>
+</div>
